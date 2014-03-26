@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="span6">
+		<!-- search form -->
+		<h4>Search for music</h4>
+		<form action="" name="Search" method="GET" >
+		    <p><input id="search" name="q" type="text" value="{{search_request}}"/></p>
+		    <p><input onclick = "return validateSearchForm();" type="submit" value="Search" class="btn btn-success"/></p>
+		</form>
+		<!-- search results -->
+		{% if search_results %}
+			{{ search_results|length }} results&nbsp;({{'%0.8f' % elapsed_time|float}} seconds)
+			{% for song in search_results %}
+				<hr/>
+					<b>{{song.name}}</b> 
+					&nbsp;<i>by</i> 
+					<b>{{song.artist}}</b>
+					<br/>
+					<i>from the album,</i>&nbsp;<b>{{song.album}}</b>
+					<form action="addsong" method="post" name="addsong">
+						<input type="hidden" name="url" value="{{song.url}}"/>
+						<input type="hidden" name="name" value="{{song.name}}"/>
+						<input type="hidden" name="artist" value="{{song.artist}}"/>
+						<input type="hidden" name="album" value="{{song.album}}"/>
+						<input type="hidden" name="search_request" value="{{search_request}}"/>
+						<input type="submit" value="Add To Playlist" class="btn btn-link"/>
+					</form>
+			{% endfor %}
+		{% endif %}
+	</div>
+	<div class="span4 offset1">
+		{% if playlist.songs|length > 0 %}
+			<h4>Playlist:</h4>
+			<ol>
+				{% for song in playlist.songs %}
+					<li>
+						{{song.name}} 
+						&nbsp;<i>by</i> 
+						{{song.artist}}
+						<br/>
+						<i>from the album,</i>
+						&nbsp;{{song.album}}
+						<form action="removesong" method="post" name="removesong">
+							<input type="hidden" name="url" value="{{song.url}}"/>
+							<input type="hidden" name="name" value="{{song.name}}">
+							<input type="hidden" name="artist" value="{{song.artist}}"/>
+							<input type="hidden" name="album" value="{{song.album}}"/>
+							<input type="hidden" name="search_request" value="{{search_request}}"/>
+							<input type="submit" value="Remove" class="btn btn-link">
+						</form>
+					</li>
+				{% endfor %}
+			</ol>
+		{% else %}
+			<p>There are no songs in your playlist. Search to find songs.</p> 
+		{% endif %} 
+	</div>
+</div>
+{% endblock %}
