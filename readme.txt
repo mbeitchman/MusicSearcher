@@ -1,15 +1,11 @@
 Marc Beitchman
 3/26/2014
 
-The project was developed on Mac OS X using Python 2.7.4 and the Flask
-micro framework for a basic web server with routing and view templates.
-Testing was done in Chrome and Firefox on Mac OS X.
+The project was developed on Mac OS X using Python 2.7.4 and the Flask micro framework for a basic web server with routing and view templates. Testing was done in Chrome and Firefox on Mac OS X.
 
 Installation:
 
-Run ./setup.sh from the root directory of the app to set up. This script
-will setup a virtual python environment and install the necessecary
-Flask files.
+Run ./setup.sh from the root directory of the app to set up. This script will setup a virtual python environment and install the necessecary Flask files.
 
 Running the server:
 
